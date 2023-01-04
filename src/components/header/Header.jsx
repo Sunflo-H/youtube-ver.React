@@ -19,10 +19,14 @@ export default function Header() {
     navigate(`/videos/${text}`);
     setText("");
   };
+
+  const handleClick = (e) => {
+    navigate(`/`);
+  };
   return (
     <div className="flex w-4/6 bg-blue-500 m-auto">
-      <div className="flex h-10">
-        <FaYoutube className="text-2xl text-red-600 h-full " />
+      <div className="flex h-10 cursor-pointer" onClick={handleClick}>
+        <FaYoutube className="text-5xl text-red-600 h-full " />
         <span className="text-2xl font-bold leading-9 pl-1">Youtube</span>
       </div>
       <div className="w-full">
