@@ -3,23 +3,24 @@ import React, { useEffect, useState } from "react";
 import Card from "./card/Card";
 
 export default function Main() {
-  const queryClient = useQueryClient();
-  const query = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["popularVideos"],
     queryFn: getPopularVideos,
-    staleTime: 5000,
+    // staleTime: 5000,
   });
+  //   console.log(data.items);
+  let today = new Date();
+  console.log(today.toString());
 
   const [title, setTitle] = useState("바람과함께사라지다");
+  if (isLoading) return <p>Loading...</p>;
+
+  if (error) return <p>{error}</p>;
   return (
-    <ul>
-      {}
-      <Card />
-      <li>카드</li>
-      <li>카드</li>
-      <li>카드</li>
-      <li>카드</li>
-      <li>카드</li>
+    <ul className="flex w-96 bg-red-500">
+      {data.items.map((item, index) => (
+        <Card item={item} key={item.id} />
+      ))}
     </ul>
   );
 }
