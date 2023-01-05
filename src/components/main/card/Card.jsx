@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
 
 export default function Card({ item }) {
-  // const {snippet} = item;
   const { title, thumbnails, channelTitle, publishedAt } = item.snippet;
-  // console.log(item);
-  // snippet.thumbnails.standard로 썸네일 이미지 사용
-  // snippet.channelTitle
-  // snippet.publishedAt
+  console.log(item.snippet.thumbnails);
 
   return (
-    <li className="basis-1/5">
-      {/* 썸네일 */}
-      <div>
-        <img src={thumbnails.standard.url}></img>
+    <li className="basis-1/5 p-1">
+      <img
+        className="w-full h-28"
+        src={thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url}
+      ></img>
+      <div className="w-full text-xm leading-5 text-ellipsis overflow-hidden line-clamp-2 font-bold">
+        {title}
       </div>
-      {/* 제목 */}
-      <span className="text-3xl">{title}</span>
-      {/* 채널명 */}
-      <span>{channelTitle}</span>
+      <div className="w-44 text-sm text-ellipsis overflow-hidden whitespace-nowrap">
+        {channelTitle}
+      </div>
       {/* 시간 */}
     </li>
   );

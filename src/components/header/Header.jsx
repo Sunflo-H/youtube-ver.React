@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Logo from "./logo/Logo";
-import Search from "./search/Search";
-import Set from "./set/Set";
+
 import { FaYoutube } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { AiFillSetting } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
@@ -30,10 +29,7 @@ export default function Header() {
         <span className="text-2xl font-bold leading-9 pl-1">Youtube</span>
       </div>
 
-      <form
-        className="flex w-7/12 h-10 bg-green-400 m-auto"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex w-7/12 h-10 m-auto" onSubmit={handleSubmit}>
         <input
           type="text"
           className=" w-full h-full outline-none px-2 border"
@@ -44,6 +40,9 @@ export default function Header() {
           <FaSearch className="text-xl m-auto text-white" />
         </button>
       </form>
+      <div className=" w-10 h-full pt-3">
+        <AiFillSetting className="text-xl m-auto text-gray-400 cursor-pointer" />
+      </div>
     </div>
   );
 }
