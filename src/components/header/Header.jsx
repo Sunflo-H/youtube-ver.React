@@ -23,7 +23,7 @@ export default function Header() {
     navigate(`/`);
   };
   return (
-    <div className="flex w-4/6 h-14 py-2 max-w-7xl m-auto mb-5 border-b">
+    <div className="flex w-4/6 h-14 px-1 py-2 max-w-7xl m-auto mb-5 border-b ">
       <div className="flex  cursor-pointer" onClick={handleClick}>
         <FaYoutube className="text-5xl text-red-600 h-full " />
         <span className="text-2xl font-bold leading-9 pl-1">Youtube</span>

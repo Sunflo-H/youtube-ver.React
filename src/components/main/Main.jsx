@@ -13,7 +13,7 @@ export default function Main() {
 
   if (isLoading) return <p>Loading...</p>;
 
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{error}gsdflkj</p>;
 
   return (
     <ul className="flex flex-wrap w-4/6 m-auto">

@@ -37,14 +37,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/videos",
-  //   element: <div>비디오</div>,
-  // },
-  // {
-  //   path: "/videos/:id",
-  //   element: <div>비티에스</div>,
-  // },
 ]);
 
 function App() {
