@@ -24,24 +24,26 @@ export default function Header() {
     navigate(`/`);
   };
   return (
-    <div className="flex w-4/6 bg-blue-500 m-auto">
-      <div className="flex h-10 cursor-pointer" onClick={handleClick}>
+    <div className="flex w-4/6 h-14 py-2 max-w-7xl m-auto mb-5 border-b">
+      <div className="flex  cursor-pointer" onClick={handleClick}>
         <FaYoutube className="text-5xl text-red-600 h-full " />
         <span className="text-2xl font-bold leading-9 pl-1">Youtube</span>
       </div>
-      <div className="w-full">
-        <form className="w-full flex h-10" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="h-10 bg-red-500 w-40 "
-            value={text}
-            onChange={handleChange}
-          />
-          <button className=" w-10 h-10 bg-blue-900 text-base ml-10">
-            <FaSearch />
-          </button>
-        </form>
-      </div>
+
+      <form
+        className="flex w-7/12 h-10 bg-green-400 m-auto"
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          className=" w-full h-full outline-none px-2 border"
+          value={text}
+          onChange={handleChange}
+        />
+        <button className="w-10 h-full bg-gray-400">
+          <FaSearch className="text-xl m-auto text-white" />
+        </button>
+      </form>
     </div>
   );
 }

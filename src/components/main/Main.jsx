@@ -16,7 +16,7 @@ export default function Main() {
   if (error) return <p>{error}</p>;
 
   return (
-    <ul className="flex w-96 bg-red-500">
+    <ul className="flex flex-wrap w-4/6 m-auto bg-red-500">
       {data.items.map((item) => (
         <Card item={item} key={item.id} />
       ))}

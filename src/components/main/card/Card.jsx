@@ -9,7 +9,7 @@ export default function Card({ item }) {
   // snippet.publishedAt
 
   return (
-    <li>
+    <li className="basis-1/5">
       {/* 썸네일 */}
       <div>
         <img src={thumbnails.standard.url}></img>
