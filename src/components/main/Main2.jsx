@@ -1,16 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Card from "./card/Card";
+import { useParams } from "react-router-dom";
 
-export default function Main() {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["popularVideos"],
-    queryFn: getPopularVideos,
+export default function Main2() {
+  const { searchId } = useParams();
+
+  let queryOptions = {
+    queryKey: ["searchVideos"],
+    queryFn: getSearchVideos,
     // staleTime: 5000,
-  });
-  let today = new Date();
-  console.log(today.toString());
+  };
 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["searchVideos"],
+    queryFn: getSearchVideos,
+  });
+
+  console.log(data);
   if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>{error}gsdflkj</p>;
@@ -22,6 +29,12 @@ export default function Main() {
       ))}
     </ul>
   );
+}
+
+async function getSearchVideos() {
+  let res = await fetch("data/searchVideos.json");
+  let data = res.json();
+  return data;
 }
 
 async function getPopularVideos() {

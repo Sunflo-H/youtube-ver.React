@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 export default function Card({ item }) {
   const { title, thumbnails, channelTitle, publishedAt } = item.snippet;
-  const { viewCount } = item.statistics;
+  // const { viewCount } = item.statistics;
 
-  let vCount = getViewCount(viewCount);
+  // let vCount = getViewCount(viewCount);
 
   let format = getFormatDate(publishedAt);
 
@@ -22,7 +22,8 @@ export default function Card({ item }) {
           {channelTitle}
         </div>
         <div className="w-full text-sm text-gray-500">
-          {vCount} views • {format}
+          {/* {vCount} views •  */}
+          {format}
         </div>
       </div>
     </li>
