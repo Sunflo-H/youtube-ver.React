@@ -13,7 +13,6 @@ export default function Card({ item, keyword }) {
    * 홈 일때 : item.id
    * 검색일때 : item.id.videoId
    */
-  console.log(keyword);
 
   return (
     <li className="basis-1/5 p-1 mb-8">
