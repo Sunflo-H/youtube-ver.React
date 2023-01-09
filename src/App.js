@@ -1,5 +1,5 @@
 import Header from "./components/header/Header";
-import Videos from "./components/main/Videos";
+import Videos from "./pages/Videos";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 // import {
 //   useQuery,
@@ -10,6 +10,7 @@ import Videos from "./components/main/Videos";
 // } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/root/Root";
+import Detail from "./pages/Detail";
 
 // const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/videos/watch/:videoId",
-        element: <Videos />,
+        element: <Detail />,
       },
     ],
   },

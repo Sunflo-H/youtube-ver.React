@@ -1,32 +1,56 @@
 import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Card({ item }) {
+export default function Card({ item, keyword }) {
   const { title, thumbnails, channelTitle, publishedAt } = item.snippet;
   // const { viewCount } = item.statistics;
 
   // let vCount = getViewCount(viewCount);
+  const navigate = useNavigate();
 
   let format = getFormatDate(publishedAt);
+  /**
+   * 홈 일때 : item.id
+   * 검색일때 : item.id.videoId
+   */
+  console.log(keyword);
 
   return (
-    <li className="basis-1/5 p-1 ">
-      <div className="cursor-pointer ">
+    <li className="basis-1/5 p-1 mb-8">
+      <Link
+        className="cursor-pointer"
+        to={`/videos/watch/${keyword ? item.id.videoId : item.id}`}
+      >
         <img
-          className="w-full h-28 rounded-md"
+          className="w-full h-40 rounded-xl"
           src={thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url}
         ></img>
-        <div className="w-full text-xm leading-5 text-ellipsis overflow-hidden line-clamp-2 font-bold">
-          {title}
-        </div>
-        <div className="w-44 text-sm text-ellipsis overflow-hidden whitespace-nowrap text-gray-500 mt-1">
-          {channelTitle}
-        </div>
-        <div className="w-full text-sm text-gray-500">
+        <div className="font-bold line-clamp-2">{title}</div>
+        <div className="text-sm mt-2">{channelTitle}</div>
+        <div className="text-sm">
           {/* {vCount} views •  */}
           {format}
         </div>
-      </div>
+      </Link>
     </li>
+    // <li className="basis-1/5 p-1 ">
+    //   <div className="cursor-pointer ">
+    //     <img
+    //       className="w-full h-28 rounded-md"
+    //       src={thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url}
+    //     ></img>
+    //     <div className="w-full text-xm leading-5 text-ellipsis overflow-hidden line-clamp-2 font-bold">
+    //       {title}
+    //     </div>
+    //     <div className="w-44 text-sm text-ellipsis overflow-hidden whitespace-nowrap text-gray-500 mt-1">
+    //       {channelTitle}
+    //     </div>
+    //     <div className="w-full text-sm text-gray-500">
+    //       {/* {vCount} views •  */}
+    //       {format}
+    //     </div>
+    //   </div>
+    // </li>
   );
 }
 

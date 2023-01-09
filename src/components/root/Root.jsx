@@ -10,7 +10,7 @@ export default function Root() {
       <Header />
       <QueryClientProvider client={queryClient}>
         <Outlet />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

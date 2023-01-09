@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
-import Card from "./card/Card";
+import Card from "../components/main/card/Card";
 
 export default function Videos() {
   const { keyword } = useParams();
@@ -23,14 +23,25 @@ export default function Videos() {
 
   return (
     <div>
-      <h1 className="text-2xl">비디오 {keyword ? ` 🔍 ${keyword}` : " 🔥"}</h1>
       {isLoading && <p>Loading</p>}
       {error && <p>{error}</p>}
 
-      <ul className="flex flex-wrap w-4/6 m-auto">
+      <ul className="flex flex-wrap">
         {videos &&
-          videos.map((item, index) => <Card item={item} key={index} />)}
+          videos.map((item) => (
+            <Card item={item} key={item.id} keyword={keyword} />
+          ))}
       </ul>
     </div>
+    // <div>
+    //   <h1 className="text-2xl">비디오 {keyword ? ` 🔍 ${keyword}` : " 🔥"}</h1>
+    //   {isLoading && <p>Loading</p>}
+    //   {error && <p>{error}</p>}
+
+    //   <ul className="flex flex-wrap w-4/6 m-auto">
+    //     {videos &&
+    //       videos.map((item, index) => <Card item={item} key={index} />)}
+    //   </ul>
+    // </div>
   );
 }

@@ -9,7 +9,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: white;
+
+  /* @apply w-screen h-screen flex flex-col items-center bg-red-500; */
+  @apply w-screen flex justify-center bg-white;
+}
+
+#root {
+  @apply max-w-screen-2xl;
+  /* @apply max-w-screen-2xl ; */
 }
 
 code {
