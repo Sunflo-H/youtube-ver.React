@@ -14,7 +14,20 @@ export default function Videos() {
     queryKey: ["videos", keyword],
 
     queryFn: async () => {
-      return fetch(`/data/${keyword ? "search" : "popular"}.json`)
+      // return fetch(`/data/${keyword ? "search" : "popular"}.json`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     return keyword
+      //       ? data.items.map((item) => {
+      //           return { ...item, id: item.id.videoId };
+      //         })
+      //       : data.items;
+      //   });
+      return fetch(
+        keyword
+          ? `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${keyword}&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744`
+          : "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744&maxResults=25"
+      )
         .then((res) => res.json())
         .then((data) => {
           return keyword
@@ -23,16 +36,9 @@ export default function Videos() {
               })
             : data.items;
         });
-      // return fetch(
-      //   keyword
-      //     ? `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${keyword}&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744`
-      //     : "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744&maxResults=25"
-      // )
-      //   .then((res) => res.json())
-      //   .then((data) => data.items);
     },
   });
-  // console.log(videos);
+
   return (
     <div>
       {isLoading && <p>Loading</p>}
@@ -40,14 +46,7 @@ export default function Videos() {
 
       <ul className="flex flex-wrap">
         {videos &&
-          videos.map((video) => (
-            <Card
-              video={video}
-              key={video.id}
-              // key={keyword ? video.id.videoId : video.id}
-              // keyword={keyword}
-            />
-          ))}
+          videos.map((video, index) => <Card video={video} key={video.id} />)}
       </ul>
     </div>
   );

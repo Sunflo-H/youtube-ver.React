@@ -20,16 +20,19 @@ export default function Card({ video, type }) {
       className=" basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 2xl:basis-1/5 p-1"
       key={video.id}
     >
-      <div className="cursor-pointer" onClick={handleClick}>
+      <div className={`${type && "flex"} cursor-pointer`} onClick={handleClick}>
         <img
-          className=" w-full rounded-xl"
+          className={type ? "w-40 rounded" : " w-full rounded-xl"}
           src={thumbnails.medium.url}
           alt={title}
         ></img>
-
-        <div className="font-bold line-clamp-2">{title}</div>
-        <div className="text-sm p-1 opacity-80">{channelTitle}</div>
-        <div className="text-sm ml-1 opacity-80">{format}</div>
+        <div className={type ? "w-60 ml-4" : "w-full"}>
+          <div className={`font-bold line-clamp-2 ${type && "text-md"}`}>
+            {title}
+          </div>
+          <div className="text-sm p-1 opacity-80">{channelTitle}</div>
+          <div className="text-sm ml-1 opacity-80">{format}</div>
+        </div>
       </div>
     </li>
   );
