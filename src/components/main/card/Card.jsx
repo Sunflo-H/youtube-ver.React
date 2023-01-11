@@ -1,71 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { VideoContext } from "../../../context/VideoContext";
 
-export default function Card({ item, keyword }) {
-  const { title, thumbnails, channelTitle, publishedAt } = item.snippet;
-  // const { viewCount } = item.statistics;
+export default function Card({ video, type }) {
+  const { title, thumbnails, channelTitle, publishedAt } = video.snippet;
 
-  // let vCount = getViewCount(viewCount);
   const navigate = useNavigate();
 
   let format = getFormatDate(publishedAt);
-  /**
-   * 홈 일때 : item.id
-   * 검색일때 : item.id.videoId
-   */
+
+  const handleClick = () => {
+    navigate(`/videos/watch/${video.id}`, {
+      state: video,
+    });
+  };
 
   return (
-    <li className="basis-1/5 p-1 mb-8">
-      <Link
-        className="cursor-pointer"
-        to={`/videos/watch/${keyword ? item.id.videoId : item.id}`}
-      >
+    <li
+      className=" basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 2xl:basis-1/5 p-1"
+      key={video.id}
+    >
+      <div className="cursor-pointer" onClick={handleClick}>
         <img
-          className="w-full h-40 rounded-xl"
-          src={thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url}
+          className=" w-full rounded-xl"
+          src={thumbnails.medium.url}
+          alt={title}
         ></img>
+
         <div className="font-bold line-clamp-2">{title}</div>
-        <div className="text-sm mt-2">{channelTitle}</div>
-        <div className="text-sm">
-          {/* {vCount} views •  */}
-          {format}
-        </div>
-      </Link>
+        <div className="text-sm p-1 opacity-80">{channelTitle}</div>
+        <div className="text-sm ml-1 opacity-80">{format}</div>
+      </div>
     </li>
-    // <li className="basis-1/5 p-1 ">
-    //   <div className="cursor-pointer ">
-    //     <img
-    //       className="w-full h-28 rounded-md"
-    //       src={thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url}
-    //     ></img>
-    //     <div className="w-full text-xm leading-5 text-ellipsis overflow-hidden line-clamp-2 font-bold">
-    //       {title}
-    //     </div>
-    //     <div className="w-44 text-sm text-ellipsis overflow-hidden whitespace-nowrap text-gray-500 mt-1">
-    //       {channelTitle}
-    //     </div>
-    //     <div className="w-full text-sm text-gray-500">
-    //       {/* {vCount} views •  */}
-    //       {format}
-    //     </div>
-    //   </div>
-    // </li>
   );
-}
-
-function getViewCount(viewCount) {
-  // viewCount가 1000, 1000000, 1000000000 일때 단위를 추가하여 리턴하는 함수
-  let result = viewCount;
-
-  if (viewCount >= 1000) result = Math.floor(viewCount / 1000) + "K";
-
-  if (Math.floor(viewCount / 1000) >= 1000)
-    result = Math.floor(viewCount / 1000000) + "M";
-
-  if (Math.floor(viewCount / 1000000) >= 1000)
-    result = Math.floor(viewCount / 1000000000) + "B";
-
-  return result;
 }
 
 function getFormatDate(publishedAt) {

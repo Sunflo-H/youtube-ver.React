@@ -11,7 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* @apply w-screen h-screen flex flex-col items-center bg-red-500; */
-  @apply w-screen flex justify-center bg-white;
+  @apply w-full flex justify-center;
 }
 
 #root {

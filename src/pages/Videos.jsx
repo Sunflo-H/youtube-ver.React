@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../components/main/card/Card";
 
 export default function Videos() {
   const { keyword } = useParams();
+
   const {
     isLoading,
     error,
@@ -15,12 +16,23 @@ export default function Videos() {
     queryFn: async () => {
       return fetch(`/data/${keyword ? "search" : "popular"}.json`)
         .then((res) => res.json())
-        .then((data) => data.items);
+        .then((data) => {
+          return keyword
+            ? data.items.map((item) => {
+                return { ...item, id: item.id.videoId };
+              })
+            : data.items;
+        });
+      // return fetch(
+      //   keyword
+      //     ? `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${keyword}&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744`
+      //     : "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyAfJbBrbKb1uxENbxnJrrJQLFwKBAfG744&maxResults=25"
+      // )
+      //   .then((res) => res.json())
+      //   .then((data) => data.items);
     },
   });
-
-  console.log(videos);
-
+  // console.log(videos);
   return (
     <div>
       {isLoading && <p>Loading</p>}
@@ -28,20 +40,15 @@ export default function Videos() {
 
       <ul className="flex flex-wrap">
         {videos &&
-          videos.map((item) => (
-            <Card item={item} key={item.id} keyword={keyword} />
+          videos.map((video) => (
+            <Card
+              video={video}
+              key={video.id}
+              // key={keyword ? video.id.videoId : video.id}
+              // keyword={keyword}
+            />
           ))}
       </ul>
     </div>
-    // <div>
-    //   <h1 className="text-2xl">비디오 {keyword ? ` 🔍 ${keyword}` : " 🔥"}</h1>
-    //   {isLoading && <p>Loading</p>}
-    //   {error && <p>{error}</p>}
-
-    //   <ul className="flex flex-wrap w-4/6 m-auto">
-    //     {videos &&
-    //       videos.map((item, index) => <Card item={item} key={index} />)}
-    //   </ul>
-    // </div>
   );
 }
